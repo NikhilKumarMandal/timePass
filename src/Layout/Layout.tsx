@@ -1,5 +1,4 @@
 
-import CodingLoverForm from '@/pages/CodingLoverForm'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
