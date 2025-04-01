@@ -124,7 +124,7 @@ return (
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="SheMale">SheMale</option>
-                <option value="Anindo">Anindo</option>
+                <option value="Anindo">Gay</option>
                 <option value="other">Other🌈</option>
               </select>
               {errors.gender && <p className="text-red-500">{errors.gender}</p>}
