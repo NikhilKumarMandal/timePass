@@ -60,8 +60,6 @@ function SoulmateFinderForm() {
     if (!formValues.hobbies) formErrors.hobbies = "Please select a hobby";
     if (!formValues.firstDate) formErrors.firstDate = "Please select an ideal first date";
     if (!formValues.movieGenre) formErrors.movieGenre = "Please select a movie genre";
-    if (!formValues.loveAtFirstSight) formErrors.loveAtFirstSight = "Please choose an option";
-    if (!formValues.loveLanguage) formErrors.loveLanguage = "Please select your love language";
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
