@@ -4,38 +4,41 @@ import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
   name: string;
-  gender: string;
-  theme: string;
+  age: string;
   instagram: string;
-  personality: string;
-  musicPreference: string;
-  dateIdea: string;
-  motivation: string;
+  gender: string;
+  hobbies: string;
+  firstDate: string;
+  movieGenre: string;
+  loveAtFirstSight: string;
+  loveLanguage: string;
 }
 
 interface FormErrors {
   name?: string;
-  gender?: string;
-  theme?: string;
+  age?: string;
   instagram?: string;
-  personality?: string;
-  musicPreference?: string;
-  dateIdea?: string;
-  motivation?: string;
+  gender?: string;
+  hobbies?: string;
+  firstDate?: string;
+  movieGenre?: string;
+  loveAtFirstSight?: string;
+  loveLanguage?: string;
 }
 
-function LoveFinderForm() {
+function SoulmateFinderForm() {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<FormValues>({
     name: '',
-    gender: '',
-    theme: '',
+    age: '',
     instagram: '',
-    personality: '',
-    musicPreference: '',
-    dateIdea: '',
-    motivation: '',
+    gender: '',
+    hobbies: '',
+    firstDate: '',
+    movieGenre: '',
+    loveAtFirstSight: '',
+    loveLanguage: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -51,140 +54,153 @@ function LoveFinderForm() {
     let formErrors: FormErrors = {};
 
     if (!formValues.name.trim()) formErrors.name = "Name is required";
+    if (!formValues.age.trim()) formErrors.age = "Age is required";
+    if (!formValues.instagram.trim()) formErrors.instagram = "Instagram username is required";
     if (!formValues.gender) formErrors.gender = "Please select a gender preference";
-    if (!formValues.theme) formErrors.theme = "Please select a theme preference";
-    if (!formValues.instagram.trim()) formErrors.instagram = "Instagram ID is required";
-    if (!formValues.personality) formErrors.personality = "Please select your personality type";
-    if (!formValues.musicPreference) formErrors.musicPreference = "Please select music preference";
-    if (!formValues.dateIdea) formErrors.dateIdea = "Please select your ideal date";
+    if (!formValues.hobbies) formErrors.hobbies = "Please select a hobby";
+    if (!formValues.firstDate) formErrors.firstDate = "Please select an ideal first date";
+    if (!formValues.movieGenre) formErrors.movieGenre = "Please select a movie genre";
+    if (!formValues.loveAtFirstSight) formErrors.loveAtFirstSight = "Please choose an option";
+    if (!formValues.loveLanguage) formErrors.loveLanguage = "Please select your love language";
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      console.log("Form validation failed", formErrors);
       return false;
     }
 
     setErrors({});
+    console.log("Form validation succeeded");
     return true;
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
     if (validateForm()) {
+      console.log("Navigating to /video");
       navigate('/video');
+    } else {
+      console.log("Form is not valid, no navigation");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-200 to-pink-200 p-4">
-      <div className="bg-gradient-to-b from-pink-500 to-orange-400 rounded-lg p-8 shadow-lg w-full max-w-lg md:max-w-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-pink-200 p-4">
+      <div className="bg-gradient-to-b from-purple-500 to-orange-400 rounded-lg p-8 shadow-lg w-full max-w-lg md:max-w-2xl">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-bold text-white">Find Your Soulmate 💖</h1>
-          <p className="text-white text-lg">Because love is just one form away!</p>
+          <p className="text-white text-lg">A fun way to see who matches your vibe!</p>
         </div>
-
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label className="text-white">Your Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formValues.name}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-              placeholder="Enter your name"
-            />
-            {errors.name && <p className="text-red-500">{errors.name}</p>}
+          
+          {/* Name & Age */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-white">Your Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formValues.name}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 rounded-md shadow-sm"
+                placeholder="e.g. Alex"
+              />
+              {errors.name && <p className="text-red-500">{errors.name}</p>}
+            </div>
+            <div>
+              <label className="text-white">Your Age</label>
+              <input
+                type="number"
+                name="age"
+                value={formValues.age}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 rounded-md shadow-sm"
+                placeholder="e.g. 24"
+              />
+              {errors.age && <p className="text-red-500">{errors.age}</p>}
+            </div>
           </div>
 
+          {/* Instagram */}
           <div>
-            <label className="text-white">Instagram ID</label>
+            <label className="text-white">Your Instagram Username</label>
             <input
               type="text"
               name="instagram"
               value={formValues.instagram}
               onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-              placeholder="@yourinstagram"
+              className="w-full mt-1 p-2 rounded-md shadow-sm"
+              placeholder="e.g. @yourhandle"
             />
             {errors.instagram && <p className="text-red-500">{errors.instagram}</p>}
           </div>
 
+          {/* Gender Preference */}
           <div>
             <label className="text-white">Looking for?</label>
             <select
               name="gender"
               value={formValues.gender}
               onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
+              className="w-full mt-1 p-2 rounded-md shadow-sm"
             >
-              <option value="">Choose your preference</option>
+              <option value="">Select preference</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other 🌈</option>
+              <option value="any">Anyone 💖</option>
             </select>
             {errors.gender && <p className="text-red-500">{errors.gender}</p>}
           </div>
 
+          {/* Hobbies */}
           <div>
-            <label className="text-white">Personality Type</label>
-            <select
-              name="personality"
-              value={formValues.personality}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-            >
-              <option value="">Select your personality</option>
-              <option value="introvert">Introvert 🤫</option>
-              <option value="extrovert">Extrovert 🎉</option>
-              <option value="ambivert">Ambivert 🔥</option>
+            <label className="text-white">Your Hobbies</label>
+            <select name="hobbies" value={formValues.hobbies} onChange={handleChange} className="w-full mt-1 p-2 rounded-md shadow-sm">
+              <option value="">Select a hobby</option>
+              <option value="travel">Traveling</option>
+              <option value="music">Music</option>
+              <option value="reading">Reading</option>
+              <option value="sports">Sports</option>
             </select>
-            {errors.personality && <p className="text-red-500">{errors.personality}</p>}
+            {errors.hobbies && <p className="text-red-500">{errors.hobbies}</p>}
           </div>
 
+          {/* First Date Preference */}
           <div>
-            <label className="text-white">Listen to Music while Chilling?</label>
-            <select
-              name="musicPreference"
-              value={formValues.musicPreference}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-            >
-              <option value="">Do you vibe with music?</option>
-              <option value="Yes">Yes 🎵</option>
-              <option value="No">No 🙅‍♂️</option>
+            <label className="text-white">Your Ideal First Date</label>
+            <select name="firstDate" value={formValues.firstDate} onChange={handleChange} className="w-full mt-1 p-2 rounded-md shadow-sm">
+              <option value="">Choose one</option>
+              <option value="dinner">Romantic Dinner</option>
+              <option value="movies">Movie Night</option>
+              <option value="adventure">Adventure Trip</option>
+              <option value="coffeeshop">Coffee Date</option>
             </select>
-            {errors.musicPreference && <p className="text-red-500">{errors.musicPreference}</p>}
+            {errors.firstDate && <p className="text-red-500">{errors.firstDate}</p>}
           </div>
 
+          {/* Movie Genre */}
           <div>
-            <label className="text-white">Your Ideal Date Idea</label>
-            <select
-              name="dateIdea"
-              value={formValues.dateIdea}
-              onChange={handleChange}
-              className="w-full mt-1 p-2 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-            >
-              <option value="">Choose your dream date</option>
-              <option value="Dinner">Romantic Dinner 🍽️</option>
-              <option value="Beach Walk">Beach Walk 🌊</option>
-              <option value="Movie Night">Movie Night 🍿</option>
-              <option value="Adventure">Adventure Trip 🏕️</option>
+            <label className="text-white">Favorite Movie Genre</label>
+            <select name="movieGenre" value={formValues.movieGenre} onChange={handleChange} className="w-full mt-1 p-2 rounded-md shadow-sm">
+              <option value="">Choose one</option>
+              <option value="romance">Romance</option>
+              <option value="horror">Horror</option>
+              <option value="action">Action</option>
             </select>
-            {errors.dateIdea && <p className="text-red-500">{errors.dateIdea}</p>}
+            {errors.movieGenre && <p className="text-red-500">{errors.movieGenre}</p>}
           </div>
 
           <div className="mt-6 text-center">
-            <button
-              type="submit"
-              className="bg-pink-600 text-white px-6 py-2 rounded-md hover:bg-pink-700 transition"
-            >
-              Find My Match 💖
+            <button type="submit" className="bg-pink-600 text-white px-6 py-2 rounded-md hover:bg-pink-700 transition">
+              Find My Soulmate 💖
             </button>
           </div>
+
         </form>
       </div>
     </div>
   );
 }
 
-export default LoveFinderForm;
+export default SoulmateFinderForm;
