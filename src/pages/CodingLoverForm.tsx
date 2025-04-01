@@ -88,7 +88,7 @@ function SoulmateFinderForm() {
       <div className="bg-gradient-to-b from-purple-500 to-orange-400 rounded-lg p-8 shadow-lg w-full max-w-lg md:max-w-2xl">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-bold text-white">Find Your Soulmate 💖</h1>
-          <p className="text-white text-lg">A fun way to see who matches your vibe!</p>
+          <p className="text-white text-lg">Discover you perfect match here!</p>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           
@@ -102,7 +102,7 @@ function SoulmateFinderForm() {
                 value={formValues.name}
                 onChange={handleChange}
                 className="w-full mt-1 p-2 rounded-md shadow-sm"
-                placeholder="e.g. Alex"
+                placeholder="e.g. aman"
               />
               {errors.name && <p className="text-red-500">{errors.name}</p>}
             </div>
